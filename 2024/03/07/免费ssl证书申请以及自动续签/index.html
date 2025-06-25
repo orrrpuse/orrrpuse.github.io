@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author"><title>免费ssl证书申请以及自动续签 · Orrrpuse</title><meta name="description" content="前言最近在折腾域名相关的东西.自然就需要ssl证书来解决https的问题.本来是想直接用阿里云的免费ssl证书,后来发现免费的证书有效期只有三个月,每隔一段时间就要重新申请.这对于我来说是绝对不能忍受的.所以我就在寻求别的方案.
+这时候我发现了Let’s Encrypt和acme.sh.虽然Let’"><meta name="og:description" content="前言最近在折腾域名相关的东西.自然就需要ssl证书来解决https的问题.本来是想直接用阿里云的免费ssl证书,后来发现免费的证书有效期只有三个月,每隔一段时间就要重新申请.这对于我来说是绝对不能忍受的.所以我就在寻求别的方案.
+这时候我发现了Let’s Encrypt和acme.sh.虽然Let’"><meta name="twitter:site" content="Orrrpuse"><meta name="twitter:title" content="免费ssl证书申请以及自动续签"><meta name="twitter:card" content="summary"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="referrer" content="no-referrer"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 7.1.1"><link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">Orrrpuse</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">絕對手順</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/tags">标签</a></li><li><a href="/about/2024-02-29-关于about.html">关于</a></li><li class="soc"><a href="https://github.com/orrrpuse" target="_blank" rel="noopener noreferrer" aria-label="Github"><i class="fa fa-github">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="http://www.orrrpuse.fun" rel="noopener noreferrer">Orrrpuse</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>免费ssl证书申请以及自动续签</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2024-03-07</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/折腾/" title="折腾">折腾</a><span>&nbsp;</span></span></p><p class="post-abstract"><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在折腾域名相关的东西.自然就需要ssl证书来解决https的问题.本来是想直接用阿里云的免费ssl证书,后来发现免费的证书有效期只有三个月,每隔一段时间就要重新申请.这对于我来说是绝对不能忍受的.所以我就在寻求别的方案.</p>
+<p>这时候我发现了<a target="_blank" rel="noopener" href="https://letsencrypt.org/zh-cn/">Let’s Encrypt</a>和<a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh">acme.sh</a>.虽然Let’s Encrypt的免费证书也只有3个月的有效期,但是可以用acme.sh的开源脚本来实现自动续签.十分推荐!!!</p>
+<h3 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本"></a>安装脚本</h3><p>国内的服务器且没有开代理的话用官方推荐的curl和wget都是连不上的.</p>
+<p><strong>官方推荐的gitee仓库很久没有更新了,会有很多乱七八遭的问题,千万别用.</strong></p>
+<p>所以我是先在自己的电脑上git clone下来项目,再整个上传到服务器上(不过这种方式更新可能会有问题).</p>
+<pre class="line-numbers language-shell"><code class="language-shell">git clone --depth 1 https://github.com/acmesh-official/acme.sh.git
+cd acme.sh
+./acme.sh --install -m my@example.com
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><p>acme.sh提供了两种方式</p>
+<p>1.http方式,需要在你的网站根目录下放置一个文件, 来验证你的域名所有权,完成验证. 然后就可以生成证书了.因为我没有采用该方式,就不写方法了.</p>
+<p>2.dns方式,在域名上添加一条 txt 解析记录, 验证域名所有权.这也是我采取的方式.</p>
+<p>dns 方式的真正强大之处在于可以使用域名解析商提供的 api 自动添加 txt 记录完成验证.acme.sh目前支持 cloudflare, dnspod, cloudxns, godaddy 以及 ovh 等数十种解析商的自动集成.当然包括阿里云.</p>
+<p>首先，需要登录阿里云帐户以获取RAM API密钥。 <a target="_blank" rel="noopener" href="https://ram.console.aliyun.com/user">https://ram.console.aliyun.com/user</a></p>
+<p>其次,输入<code>Ali_Key</code>和<code>Ali_Secret</code></p>
+<pre class="line-numbers language-shell"><code class="language-shell">export Ali_Key="<key>"
+export Ali_Secret="<secret>"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>好了，现在我们来开一张证书：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./acme.sh --issue --dns dns_ali -d orrrpuse.fun -d *.orrrpuse.fun
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>Ali_Key</code>和<code>Ali_Secret</code>将保存在<code>~/.acme.sh/account.conf</code>中，并在需要时重复使用。</p>
+<h3 id="copy-安装-证书"><a href="#copy-安装-证书" class="headerlink" title="copy&#x2F;安装 证书"></a>copy&#x2F;安装 证书</h3><p>前面证书生成以后, 接下来需要把证书 copy 到真正需要用它的地方.</p>
+<p>注意, 默认生成的证书都放在安装目录下: <code>~/.acme.sh/</code>, 官方强调<strong>不要直接使用此目录下的文件</strong>. 这里面的文件都是内部使用, 而且目录结构可能会变化.</p>
+<p>正确的使用方法是使用 <code>--install-cert</code> 命令,并指定目标位置, 然后证书文件会被copy到相应的位置, 例如:</p>
+<pre class="line-numbers language-shell"><code class="language-shell">acme.sh --install-cert -d orrrpuse.fun \
+--key-file       /path/to/keyfile/in/nginx/key.pem  \
+--fullchain-file /path/to/fullchain/nginx/cert.pem \
+--reloadcmd     "nginx -s reload"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>(一个小提醒, 新版本的nginx可能会用 <code>service nginx force-reload</code>)</p>
+<h3 id="检查已安装证书信息"><a href="#检查已安装证书信息" class="headerlink" title="检查已安装证书信息"></a>检查已安装证书信息</h3><p>查看已安装的证书信息:</p>
+<pre class="line-numbers language-shell"><code class="language-shell">acme.sh --info -d orrrpuse.fun
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>目前证书在 60 天以后会自动更新, 我们无需任何操作. 今后有可能会缩短这个时间, 不过都是自动的, 你不用关心.</p>
+<p>请确保 cronjob 正确安装, 看起来是类似这样的:</p>
+<pre class="line-numbers language-shell"><code class="language-shell">crontab  -l
+
+56 * * * * "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>也可以试着用上面这条命令执行看一下相关的配置是否正确。但是离过期时间大于两个月需要强制更新</p>
+<pre class="line-numbers language-shell"><code class="language-shell">acme.sh --renew -d orrrpuse.fun --force
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后就可以检查证书信息有没有更新了,我推荐这个网站<a target="_blank" rel="noopener" href="https://www.ssllabs.com/ssltest">https://www.ssllabs.com/ssltest</a> 可以查询ssl的证书信息.</p>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/2024/03/08/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8E%E8%99%BE%F0%9F%A6%90(%E6%96%87%E6%91%98)/" title="程序员与虾🦐(文摘)"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 程序员与虾🦐(文摘)</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/2024/03/01/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="Hexo博客搭建">下一篇: Hexo博客搭建&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="http://www.orrrpuse.fun" rel="noopener noreferrer">Orrrpuse</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author"><title>Hexo博客搭建 · Orrrpuse</title><meta name="description" content="前言在我搭建博客之前,我调研了市面上大家常用的博客框架,其中最著名,使用人数最多当属WordPress,但是在我实际使用之后,我发现我并不需要这么重的一个博客框架,WordPress其中的大部分功能我都用不到.在这过程中,我也渐渐清晰了我的需求,我所需要的是一个简单,简洁的博客框架,且可以使用mar"><meta name="og:description" content="前言在我搭建博客之前,我调研了市面上大家常用的博客框架,其中最著名,使用人数最多当属WordPress,但是在我实际使用之后,我发现我并不需要这么重的一个博客框架,WordPress其中的大部分功能我都用不到.在这过程中,我也渐渐清晰了我的需求,我所需要的是一个简单,简洁的博客框架,且可以使用mar"><meta name="twitter:site" content="Orrrpuse"><meta name="twitter:title" content="Hexo博客搭建"><meta name="twitter:card" content="summary"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="referrer" content="no-referrer"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 7.1.1"><link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">Orrrpuse</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">絕對手順</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/tags">标签</a></li><li><a href="/about/2024-02-29-关于about.html">关于</a></li><li class="soc"><a href="https://github.com/orrrpuse" target="_blank" rel="noopener noreferrer" aria-label="Github"><i class="fa fa-github">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="http://www.orrrpuse.fun" rel="noopener noreferrer">Orrrpuse</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>Hexo博客搭建</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2024-03-01</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/折腾/" title="折腾">折腾</a><span>&nbsp;</span></span></p><p class="post-abstract"><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>在我搭建博客之前,我调研了市面上大家常用的博客框架,其中最著名,使用人数最多当属WordPress,但是在我实际使用之后,我发现我并不需要这么重的一个博客框架,WordPress其中的大部分功能我都用不到.在这过程中,我也渐渐清晰了我的需求,我所需要的是一个简单,简洁的博客框架,且可以使用markdown来编写博客,这时我发现了Hexo.</p>
+<p>其实Hexo的简单,纯静态只是我选择它的一半的原因,另一个原因是Hexo的一个主题,也就是我现在当前博客使用的主题<a target="_blank" rel="noopener" href="https://github.com/sumimakito/hexo-theme-typography">typography</a>,这个主题实在是太符合我的审美了,虽然作者现在好像也不维护了,但我依然要大力推荐!(自己稍微改改代码也不是不行嘛)</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>作为一个轻量级的博客框架,安装也是非常简单的(<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官方文档</a>)</p>
+<p>1.安装git</p>
+<p>2.安装node.js</p>
+<p>3.安装Hexo</p>
+<pre class="line-numbers language-shell"><code class="language-shell"># 安装 hexo
+hexo npm install hexo-cli g 
+# 初始化博客文件
+hexo init blog
+# 切换到该路径
+cd blog
+# 安装hexo的扩展插件
+npm install
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>4.安装主题</p>
+<pre class="line-numbers language-shell"><code class="language-shell">npm uninstall --save hexo-generator-category 
+npm install --save hexo-renderer-pug hexo-generator-archive hexo-generator-category-enhance hexo-generator-feed hexo-generator-tag
+npm install --save hexo-prism-plugin 
+
+git clone https://github.com/orrrpuse/hexo-theme-typography.git themes/typography
+cd themes/typography
+npm install
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>首先是根目录下Hexo的配置文件(<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">官方文档</a>)</p>
+<p>其次是&#x2F;theme&#x2F;typography目录下主题的配置文件(<a target="_blank" rel="noopener" href="https://github.com/sumimakito/hexo-theme-typography">主题README配置文档</a>)</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>注意,要在Hexo根目录下执行命令</p>
+<pre class="line-numbers language-shell"><code class="language-shell">hexo clean && hexo g && hexo s
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h4><p>可以使用官方命令</p>
+<pre class="line-numbers language-shell"><code class="language-shell">hexo new <标题名>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>或者直接复制你的markdown文件到&#x2F;source&#x2F;_posts 中</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>因为是静态文件,想要部署博客可以用nginx直接引用.</p>
+<p>或者官方也提供了开启web服务的命令</p>
+<pre class="line-numbers language-shell"><code class="language-shell">hexo s
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>不过我更推荐另一种更加优雅的方式:</p>
+<p>通过官方提供的一键部署的方式直接部署到GitHub Pages,可以实现提交新的文章之后自动部署到GitHub Pages上</p>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/2024/03/07/%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7%E4%BB%A5%E5%8F%8A%E8%87%AA%E5%8A%A8%E7%BB%AD%E7%AD%BE/" title="免费ssl证书申请以及自动续签"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 免费ssl证书申请以及自动续签</a></span></p></div></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="http://www.orrrpuse.fun" rel="noopener noreferrer">Orrrpuse</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>
